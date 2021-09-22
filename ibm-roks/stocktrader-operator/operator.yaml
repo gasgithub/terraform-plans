@@ -1,0 +1,23 @@
+apiVersion: operators.coreos.com/v1alpha1 
+kind: CatalogSource 
+metadata: 
+  name: cloud-engagement-hub 
+  namespace: openshift-marketplace 
+spec: 
+  displayName: Cloud Engagement Hub 
+  image: 'docker.io/ibmstocktrader/stocktrader-operator-catalog:v0.2.0' 
+  publisher: IBM 
+  sourceType: grpc 
+--- 
+apiVersion: operators.coreos.com/v1alpha1 
+kind: Subscription 
+metadata: 
+  name: stocktrader-operator 
+  namespace: openshift-operators 
+spec: 
+  channel: alpha 
+  installPlanApproval: Automatic 
+  name: stocktrader-operator 
+  source: cloud-engagement-hub 
+  sourceNamespace: openshift-marketplace 
+  startingCSV: stocktrader-operator.v0.2.0
