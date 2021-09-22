@@ -10,14 +10,8 @@ variable "resource_group" {
   default = "default"
 }
 
-variable "cluster_name" {
-  default = "gas-terra-roks"
-}
-
 variable "stocktrader_namespace"{
   default = "terra-stocktrader"
 }
 
-variable "cluster_name"{
-  default = ""
-}
+variable "cluster_name"{}
