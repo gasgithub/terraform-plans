@@ -14,4 +14,5 @@ variable "stocktrader_namespace"{
   default = "terra-stocktrader"
 }
 
-variable "cluster_name"{}
+variable "cluster_name"{
+}
