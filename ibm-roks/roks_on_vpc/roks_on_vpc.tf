@@ -5,10 +5,14 @@ resource "random_id" "name1" {
 resource "random_id" "name2" {
   byte_length = 2
 }
+resource "random_id" "name3" {
+  byte_length = 2
+}
 
 locals {
   ZONE1 = "${var.region}-1"
   ZONE2 = "${var.region}-2"
+  ZONE3 = "${var.region}-3"  
 }
 
 resource "ibm_is_vpc" "vpc1" {
@@ -25,6 +29,11 @@ resource "ibm_is_public_gateway" "testacc_gateway2" {
     name = "gas-public-gateway-${random_id.name2.hex}"
     vpc = ibm_is_vpc.vpc1.id
     zone = local.ZONE2
+}
+resource "ibm_is_public_gateway" "testacc_gateway3" {
+    name = "gas-public-gateway-${random_id.name3.hex}"
+    vpc = ibm_is_vpc.vpc1.id
+    zone = local.ZONE3
 }
 
 resource "ibm_is_security_group_rule" "testacc_security_group_rule_tcp" {
@@ -51,6 +60,14 @@ resource "ibm_is_subnet" "subnet2" {
   total_ipv4_address_count = 256
   public_gateway = ibm_is_public_gateway.testacc_gateway2.id
 }
+resource "ibm_is_subnet" "subnet3" {
+  name                     = "gas-subnet-${random_id.name3.hex}"
+  vpc                      = ibm_is_vpc.vpc1.id
+  zone                     = local.ZONE3
+  total_ipv4_address_count = 256
+  public_gateway = ibm_is_public_gateway.testacc_gateway3.id
+}
+
 
 data "ibm_resource_group" "resource_group" {
   name = var.resource_group
@@ -88,6 +105,10 @@ resource "ibm_container_vpc_cluster" "cluster" {
     subnet_id = ibm_is_subnet.subnet2.id
     name      = local.ZONE2
   }
+  zones {
+    subnet_id = ibm_is_subnet.subnet3.id
+    name      = local.ZONE3
+  }  
 
   kms_config {
     instance_id = ibm_resource_instance.kms_instance1.guid
