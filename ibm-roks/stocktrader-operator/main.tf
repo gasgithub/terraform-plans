@@ -11,11 +11,11 @@ provider "kubernetes" {
   cluster_ca_certificate = data.ibm_container_cluster_config.roks_cluster.ca_certificate
 }
 
-resource "kubernetes_namespace" "stocktrader" {
-  metadata {
-    name = var.stocktrader_namespace
-  }
-}
+# resource "kubernetes_namespace" "stocktrader" {
+#   metadata {
+#     name = var.stocktrader_namespace
+#   }
+# }
 
 provider "kubectl" {
   host                   = data.ibm_container_cluster_config.roks_cluster.host
