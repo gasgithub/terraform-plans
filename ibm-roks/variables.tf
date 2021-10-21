@@ -19,7 +19,7 @@ variable "cluster_kube_version" {
 }
 
 variable "deafult_worker_pool_count"{
-    default = "1"
+    default = "2"
 }
 
 variable "region" {
