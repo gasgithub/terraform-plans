@@ -16,27 +16,27 @@ locals {
 }
 
 resource "ibm_is_vpc" "vpc1" {
-  name = "gas-vpc-${random_id.name1.hex}"
+  name = "dev-build-vpc-${random_id.name1.hex}"
 }
 
-resource "ibm_is_public_gateway" "testacc_gateway1" {
-    name = "gas-public-gateway-${random_id.name1.hex}"
+resource "ibm_is_public_gateway" "dev-build_gateway1" {
+    name = "dev-build-public-gateway-${random_id.name1.hex}"
     vpc = ibm_is_vpc.vpc1.id
     zone = local.ZONE1
 }
 
-resource "ibm_is_public_gateway" "testacc_gateway2" {
-    name = "gas-public-gateway-${random_id.name2.hex}"
+resource "ibm_is_public_gateway" "dev-build_gateway2" {
+    name = "dev-build-public-gateway-${random_id.name2.hex}"
     vpc = ibm_is_vpc.vpc1.id
     zone = local.ZONE2
 }
-resource "ibm_is_public_gateway" "testacc_gateway3" {
-    name = "gas-public-gateway-${random_id.name3.hex}"
+resource "ibm_is_public_gateway" "dev-build_gateway3" {
+    name = "dev-build-public-gateway-${random_id.name3.hex}"
     vpc = ibm_is_vpc.vpc1.id
     zone = local.ZONE3
 }
 
-resource "ibm_is_security_group_rule" "testacc_security_group_rule_tcp" {
+resource "ibm_is_security_group_rule" "dev-build_security_group_rule_tcp" {
     group = ibm_is_vpc.vpc1.default_security_group
     direction = "inbound"
     tcp {
@@ -46,26 +46,26 @@ resource "ibm_is_security_group_rule" "testacc_security_group_rule_tcp" {
  }
 
 resource "ibm_is_subnet" "subnet1" {
-  name                     = "gas-subnet-${random_id.name1.hex}"
+  name                     = "dev-build-subnet-${random_id.name1.hex}"
   vpc                      = ibm_is_vpc.vpc1.id
   zone                     = local.ZONE1
   total_ipv4_address_count = 256
-  public_gateway = ibm_is_public_gateway.testacc_gateway1.id
+  public_gateway = ibm_is_public_gateway.dev-build_gateway1.id
 }
 
 resource "ibm_is_subnet" "subnet2" {
-  name                     = "gas-subnet-${random_id.name2.hex}"
+  name                     = "dev-build-subnet-${random_id.name2.hex}"
   vpc                      = ibm_is_vpc.vpc1.id
   zone                     = local.ZONE2
   total_ipv4_address_count = 256
-  public_gateway = ibm_is_public_gateway.testacc_gateway2.id
+  public_gateway = ibm_is_public_gateway.dev-build_gateway2.id
 }
 resource "ibm_is_subnet" "subnet3" {
-  name                     = "gas-subnet-${random_id.name3.hex}"
+  name                     = "dev-build-subnet-${random_id.name3.hex}"
   vpc                      = ibm_is_vpc.vpc1.id
   zone                     = local.ZONE3
   total_ipv4_address_count = 256
-  public_gateway = ibm_is_public_gateway.testacc_gateway3.id
+  public_gateway = ibm_is_public_gateway.dev-build_gateway3.id
 }
 
 
@@ -74,15 +74,15 @@ data "ibm_resource_group" "resource_group" {
 }
 
 resource "ibm_resource_instance" "kms_instance1" {
-    name              = "gas_terra_de"
+    name              = "dev-build-kms"
     service           = "kms"
     plan              = "tiered-pricing"
     location          = var.region
 }
   
-resource "ibm_kms_key" "test" {
+resource "ibm_kms_key" "dev-build" {
     instance_id = "${ibm_resource_instance.kms_instance1.guid}"
-    key_name = "test_root_key"
+    key_name = "dev-build_root_key"
     standard_key =  false
     force_delete = true
 }
