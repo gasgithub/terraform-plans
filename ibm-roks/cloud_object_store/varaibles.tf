@@ -7,3 +7,5 @@ variable "service_offering" {
 
 variable "plan" {
 }
+
+variable "resource_group" {}

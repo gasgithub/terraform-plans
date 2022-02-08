@@ -17,6 +17,7 @@ locals {
 
 resource "ibm_is_vpc" "vpc1" {
   name = "dev-build-vpc-${random_id.name1.hex}"
+  resource_group = var.resource_group
 }
 
 resource "ibm_is_public_gateway" "dev-build_gateway1" {
