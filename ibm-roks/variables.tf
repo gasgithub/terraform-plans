@@ -3,7 +3,7 @@ variable "ibmcloud_api_key" {
 }
 
 variable "cos_service_name" {
-    default = "gas-terra-de"
+    default = "dev-build-cos"
 }
 
 variable "cos_service_plan" {
@@ -11,11 +11,11 @@ variable "cos_service_plan" {
 }
 
 variable "cluster_node_flavor" {
-    default = "bx2.4x16"
+    default = "bx2.8x32"
 }
 
 variable "cluster_kube_version" {
-    default = "4.7_openshift"
+    default = "4.8_openshift"
 }
 
 variable "deafult_worker_pool_count"{
@@ -23,15 +23,15 @@ variable "deafult_worker_pool_count"{
 }
 
 variable "region" {
-  default = "us-south"
+  default = "us-east"
 }
 
 variable "resource_group" {
-  default = "default"
+  default = "dev-build"
 }
 
 variable "cluster_name" {
-  default = "gas-terra-roks"
+  default = "dev-build"
 }
 
 variable "worker_pool_name" {
@@ -39,6 +39,6 @@ variable "worker_pool_name" {
 }
 
 variable "entitlement"{
-  default = ""
+  default = "cloud_pak"
 }
 

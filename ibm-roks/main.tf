@@ -2,6 +2,7 @@ module "cos" {
   source =  "./cloud_object_store"
   service_instance_name = var.cos_service_name
   plan = var.cos_service_plan
+  resource_group = var.resource_group
 }
 
 module "cluster_and_workerpool" {
