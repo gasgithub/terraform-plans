@@ -79,6 +79,7 @@ resource "ibm_resource_instance" "kms_instance1" {
     service           = "kms"
     plan              = "tiered-pricing"
     location          = var.region
+    resource_group_id = data.ibm_resource_group.resource_group.id  
 }
   
 resource "ibm_kms_key" "dev-build" {
