@@ -1,3 +1,7 @@
+resource "random_id" "name1" {
+  byte_length = 2
+}
+
 data "ibm_pi_image" "data_source_image" {
   pi_cloud_instance_id = var.cloud_instance_id
   pi_image_name        = var.image_name
@@ -15,7 +19,7 @@ data "ibm_pi_key" "data_source_key" {
 }
 resource "ibm_pi_network" "network" {
   pi_cloud_instance_id = var.cloud_instance_id
-  pi_network_name      = var.network_name
+  pi_network_name      = "${var.network_name}-${random_id.name1.hex}"
   pi_network_type      = var.network_type
   count                = var.network_count
 }
