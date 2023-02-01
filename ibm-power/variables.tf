@@ -109,10 +109,3 @@ variable "volume_type" {
   type        = string
   default     = "tier3"
 }
-
-// Image
-variable "TF_LOG" {
-  description = "Terrafor log level e.g. debug"
-  type        = string
-  default     = ""
-}
