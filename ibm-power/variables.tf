@@ -36,7 +36,7 @@ variable "instance_name" {
 variable "memory" {
   description = "Instance memory"
   type        = number
-  default     = 4
+  default     = 2
 }
 variable "processors" {
   description = "Instance processors"
@@ -108,4 +108,11 @@ variable "volume_type" {
   description = "Type of a volume"
   type        = string
   default     = "tier3"
+}
+
+// Image
+variable "TF_LOG" {
+  description = "Terrafor log level e.g. debug"
+  type        = string
+  default     = ""
 }
