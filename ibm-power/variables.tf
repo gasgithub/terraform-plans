@@ -19,6 +19,27 @@ variable "cloud_instance_id" {
   type        = string
   default     = "<cid>"
 }
+variable "resource_group" {
+  description = "Resource group name"
+  type        = string
+  default     = "devOps"  
+}
+
+
+variable "cos_service_offering" {
+  description = "COS Service offering name"
+  default = "cloud-object-storage"
+}
+
+variable "cos_service_name" {
+  description = "COS Service name"
+  default = "gas-vsi-cos"
+}
+
+variable "cos_service_plan" {
+  description = "COS Service plan"
+  default = "standard"
+}
 
 // Image
 variable "image_name" {
